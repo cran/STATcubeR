@@ -40,7 +40,7 @@
 #' * rounding is done according to the precision of each measure. Rounding
 #'   happens after the recoding to `NA` values
 #' @seealso sc_table_class
-#' @examples
+#' @examplesIf od_server_reachable()
 #' ############################ OGD Data #######################################
 #'
 #' table <- od_table("OGD_veste309_Veste309_1")
@@ -93,12 +93,12 @@
 #'
 #' ######################## 'STATcube' REST API ################################
 #'
-#' @examplesIf sc_key_exists()
+#' @examplesIf sc_key_exists() && sc_server_reachable()
 #' table_tourism <- sc_table(sc_example("accomodation.json"), "de")
 #'
 #' table_tourism$tabulate()
-#' table_tourism$tabulate("Saison/Tourismusmonat")
-#' table_tourism$tabulate("Saison/Tourismusmonat", "Ankünfte")
+#' table_tourism$tabulate("Saison / Tourismusmonat")
+#' table_tourism$tabulate("Saison / Tourismusmonat", "Ankünfte")
 #' table_tourism$tabulate("Ankünfte")
 #' @return a `data.frame`
 #' @export

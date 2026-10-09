@@ -103,41 +103,45 @@ if the provided \code{VALUE}s belong to the \code{VALUESET/FIELD}
 }
 
 \examples{
-\dontshow{if (sc_key_exists()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-sc_table_custom("str:database:detouextregsai")
+\dontshow{if (sc_key_exists() && sc_server_reachable()) withAutoprint(\{ # examplesIf}
+sc_table_custom("str:database:detouextregiosai")
 
 sc_table_custom(
-  "str:database:detouextregsai",
-  dimensions = "str:field:detouextregsai:F-DATA1:C-SDB_TIT-0"
+  "str:database:detouextregiosai",
+  dimensions = "str:field:detouextregiosai:F-DATA1:C-SDB_TIT-0"
 )
 
 sc_table_custom(
-  db = "str:database:detouextregsai",
+  db = "str:database:detouextregiosai",
   measures = c(
-    "str:statfn:detouextregsai:F-DATA1:F-ANK:SUM",
-    "str:measure:detouextregsai:F-DATA1:F-UEB"
+    "str:statfn:detouextregiosai:F-DATA1:F-ANK:SUM",
+    "str:measure:detouextregiosai:F-DATA1:F-UEB"
   ),
   dimensions = c(
-    "str:field:detouextregsai:F-DATA1:C-SDB_TIT-0",
-    "str:valueset:detouextregsai:F-DATA1:C-C93-2:C-C93SUM-0"
+    "str:field:detouextregiosai:F-DATA1:C-SDB_TIT-0",
+    "str:valueset:detouextregiosai:F-DATA1:C-C93-2:C-C93SUM-0"
   )
 )
 
-schema <- sc_schema_db("detouextregsai")
+schema <- sc_schema_db("detouextregiosai")
 region <- schema$`Other Classifications`$`Tourism commune [ABO]`$
   `Regionale Gliederung (Ebene +1)`
 month <- schema$`Mandatory fields`$`Season/Tourism Month`
 
+
 x <- sc_table_custom(
-  schema,
-  schema$Facts$Arrivals,
-  list(month, region),
+  db = schema,
+  measures = schema$Facts$Arrivals,
+  dimensions = list(month, region),
   recodes = c(
-    sc_recode(region, total = FALSE, map = list(
-      region$Achensee,
-      list(region$Arlberg, region$`Ausseerland-Salzkammergut`)
-    )),
-    sc_recode(month, total = FALSE)
+    sc_recode(
+      field = region,
+      total = FALSE,
+      map = list(
+        region$Achensee, list(region$Großarltal, region$`Ausseerland-Salzkammergut`)
+      )
+    ),
+    sc_recode(field = month, total = FALSE)
   )
 )
 x$tabulate()

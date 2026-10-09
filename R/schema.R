@@ -30,6 +30,8 @@
 #' @export
 sc_schema <- function(id = NULL, depth = NULL,
                       language = NULL, key = NULL, server = "ext") {
+  if (sc_abort_api_unavailable(server))
+    return(invisible(NULL))
   language <- sc_language(language)
   if (is.null(key))
     key <- sc_key(server)
@@ -167,10 +169,9 @@ sc_schema_flatten_impl <- function(resp, type) {
 }
 
 #' @describeIn sc_schema is similar to the
-#' [catalogue explorer](`r sc_browse_catalogue()`) of the STATcube GUI and returns
+#' Catalogue explorer (see [sc_browse_catalogue()]) of the STATcube GUI and returns
 #' a tree-type object containing all databases and tables.
 #' @export
 sc_schema_catalogue <- function(depth = "folder", ...) {
   sc_schema(id = NULL, depth = depth, ...)
 }
-

@@ -74,13 +74,13 @@ are wrapped into a class called \code{sc_schema} to simplify the usage in R.
 \item \code{sc_schema_flatten()}: turns a \code{sc_schema} object into a \code{data.frame}
 
 \item \code{sc_schema_catalogue()}: is similar to the
-\href{https://portal.statistik.at/statistik.at/ext/statcube/jsf/dataCatalogueExplorer.xhtml}{catalogue explorer} of the STATcube GUI and returns
+Catalogue explorer (see \code{\link[=sc_browse_catalogue]{sc_browse_catalogue()}}) of the STATcube GUI and returns
 a tree-type object containing all databases and tables.
 
 \item \code{sc_schema_db()}: is similar to the
-\href{https://portal.statistik.at/statistik.at/ext/statcube/opendatabase?id=deake005}{table view}
-of the STATcube GUI and gives information about all measures and
-classification fields for a specific database
+'table view* of the STATcube GUI (see. eg. (\code{\link[=sc_browse_database]{sc_browse_database()}} and
+open a specific database). The functions returns information about all measures and
+classification fields for the selected database.
 
 }}
 \section{Printing with data.tree}{
@@ -95,7 +95,7 @@ To use \code{data.tree} printing permanently, use
 }
 
 \examples{
-\dontshow{if (sc_key_exists()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (sc_key_exists() && sc_server_reachable()) withAutoprint(\{ # examplesIf}
 my_catalogue <- sc_schema_catalogue()
 
 ## print

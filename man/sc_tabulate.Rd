@@ -71,6 +71,7 @@ happens after the recoding to \code{NA} values
 }
 }
 \examples{
+\dontshow{if (od_server_reachable()) withAutoprint(\{ # examplesIf}
 ############################ OGD Data #######################################
 
 table <- od_table("OGD_veste309_Veste309_1")
@@ -122,13 +123,13 @@ table$tabulate("C-A11-0")      # -> 3 rows: "total", "male", "female"
 sc_tabulate(table, "C-A11-0")
 
 ######################## 'STATcube' REST API ################################
-
-\dontshow{if (sc_key_exists()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{\}) # examplesIf}
+\dontshow{if (sc_key_exists() && sc_server_reachable()) withAutoprint(\{ # examplesIf}
 table_tourism <- sc_table(sc_example("accomodation.json"), "de")
 
 table_tourism$tabulate()
-table_tourism$tabulate("Saison/Tourismusmonat")
-table_tourism$tabulate("Saison/Tourismusmonat", "Ankünfte")
+table_tourism$tabulate("Saison / Tourismusmonat")
+table_tourism$tabulate("Saison / Tourismusmonat", "Ankünfte")
 table_tourism$tabulate("Ankünfte")
 \dontshow{\}) # examplesIf}
 }
